@@ -1,3 +1,7 @@
+
+/*https://www.themoviedb.org/settings/api Api фильмов*/
+/*https://jsoneditoronline.org/#left=local.giquje json*/
+
 package com.example.filmforfriends
 
 import androidx.appcompat.app.AppCompatActivity
