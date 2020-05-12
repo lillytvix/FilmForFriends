@@ -7,17 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.for_element.*
 
 
 class DrammaFragment : Fragment() {
     val adapter = Adapter()
 
+
+
+
     companion object {
         private const val EXTRA_HORROR = "HORROR"
 
-        /* метод для создания фрагмента, который будет отображать game */
         fun newFragment(film: Film): DrammaFragment {
 
             val fragment = DrammaFragment() // создаём фрагмент
@@ -28,6 +32,7 @@ class DrammaFragment : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,16 +41,22 @@ class DrammaFragment : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val film = arguments!!.getSerializable(EXTRA_HORROR) as Film
-        Picasso.get().load(film.image.original).fit().centerCrop().into()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        adapter.image = listOf(
+            Film("https://images-ext-1.discordapp.net/external/2oCfdQ5_d4IEed0gb9SEYickUeXBKWSHrb47TDlZV-U/https/imgflip.com/s/meme/Mocking-Spongebob.jpg"),
+            Film("https://media.discordapp.net/attachments/689473486183202878/697097256150761532/unknown.png"),
+            Film("https://images-ext-1.discordapp.net/external/2oCfdQ5_d4IEed0gb9SEYickUeXBKWSHrb47TDlZV-U/https/imgflip.com/s/meme/Mocking-Spongebob.jpg")
+        )
     }
 
 
     inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        var image: List<Image>? = null
+        var image: List<Film>? = null
             set(value) {
                 field = value
                 notifyDataSetChanged()
@@ -65,7 +76,7 @@ class DrammaFragment : Fragment() {
         /* а этот метод заполняет вьюшки содержимым */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val film = image!![position]
-            Picasso.get().load(film.original).fit().centerCrop().into(holder.imageView) // загружаем картинку
+            Picasso.get().load(film.image).fit().centerCrop().into(holder.imageView) // загружаем картинку
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
 
@@ -74,7 +85,7 @@ class DrammaFragment : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.screen) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
         }
     }
 

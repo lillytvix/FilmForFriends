@@ -6,11 +6,6 @@ import java.io.Serializable
 
 
 class Film(
-    val id: Int,
-    val name: Int,
-    val image: Image
+    val image: String
 ) : Serializable
 
-class Image(
-    val original: String
-)
