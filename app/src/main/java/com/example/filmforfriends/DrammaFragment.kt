@@ -1,16 +1,21 @@
 package com.example.filmforfriends
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.for_element.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class DrammaFragment : Fragment() {
@@ -46,11 +51,24 @@ class DrammaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-        adapter.image = listOf(
-            Film("https://images-ext-1.discordapp.net/external/2oCfdQ5_d4IEed0gb9SEYickUeXBKWSHrb47TDlZV-U/https/imgflip.com/s/meme/Mocking-Spongebob.jpg"),
-            Film("https://media.discordapp.net/attachments/689473486183202878/697097256150761532/unknown.png"),
-            Film("https://images-ext-1.discordapp.net/external/2oCfdQ5_d4IEed0gb9SEYickUeXBKWSHrb47TDlZV-U/https/imgflip.com/s/meme/Mocking-Spongebob.jpg")
-        )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateMovies()
+    }
+
+    fun updateMovies(){
+        Database.service.requestmovies().enqueue(object : Callback<MovieResults> {
+            override fun onFailure(call: Call<MovieResults>, t: Throwable) {
+                Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
+                Log.e("GamesFragment", "onFailure", t)
+            }
+
+            override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
+                adapter.image = response.body()?.results
+            }
+        })
     }
 
 
@@ -76,7 +94,7 @@ class DrammaFragment : Fragment() {
         /* а этот метод заполняет вьюшки содержимым */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val film = image!![position]
-            Picasso.get().load(film.image).fit().centerCrop().into(holder.imageView) // загружаем картинку
+            Picasso.get().load("http://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
 

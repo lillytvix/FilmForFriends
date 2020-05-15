@@ -19,11 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val img = BitmapFactory.decodeResource(resources, R.layout.image_item)
-        val round = RoundedBitmapDrawableFactory.create(resources, img)
-
-        round.cornerRadius = 25f
-        Image_item.setImageDrawable(round)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.Main_Activiti, DrammaFragment())
