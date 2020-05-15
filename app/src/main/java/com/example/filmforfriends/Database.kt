@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 object Database{
 
@@ -17,5 +18,5 @@ object Database{
 
 interface MoviesService{
     @GET("discover/movie?sort_by=popularity.desc&api_key=795d87bfa31bd215fc78ae4423e39543")
-    fun requestmovies(): Call<MovieResults>
+    fun requestmovies(@Query("page") page: Int): Call<MovieResults>
 }

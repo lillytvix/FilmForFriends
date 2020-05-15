@@ -59,29 +59,31 @@ class DrammaFragment : Fragment() {
     }
 
     fun updateMovies(){
-        Database.service.requestmovies().enqueue(object : Callback<MovieResults> {
+        for (i in 1..5) {
+        Database.service.requestmovies(i).enqueue(object : Callback<MovieResults> {
             override fun onFailure(call: Call<MovieResults>, t: Throwable) {
                 Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
-                Log.e("GamesFragment", "onFailure", t)
+                Log.e("MoviesFragment", "onFailure", t)
             }
 
             override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
-                adapter.image = response.body()?.results
+                val newMovies: List<Film> = response.body()?.results?: return
+                adapter.movies.addAll(newMovies)
             }
         })
-    }
+    }}
 
 
     inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        var image: List<Film>? = null
+        var movies: MutableList<Film> = mutableListOf()
             set(value) {
                 field = value
                 notifyDataSetChanged()
             }
 
         override fun getItemCount(): Int {
-            return image?.size ?: 0
+            return movies?.size ?: 0
         }
 
 
@@ -93,8 +95,8 @@ class DrammaFragment : Fragment() {
 
         /* а этот метод заполняет вьюшки содержимым */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val film = image!![position]
-            Picasso.get().load("http://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
+            val film = movies!![position]
+            Picasso.get().load("https://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
 
