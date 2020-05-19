@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowId
 import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.for_element.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.reflect.Array.set
 
 
 class DrammaFragment : Fragment() {
@@ -27,14 +29,17 @@ class DrammaFragment : Fragment() {
     companion object {
         private const val EXTRA_HORROR = "HORROR"
 
-        fun newFragment(film: Film): DrammaFragment {
+        fun newFragment(genres: Int?): DrammaFragment {
 
             val fragment = DrammaFragment() // создаём фрагмент
             val arguments = Bundle() // создаём коробочку для аргументов
-            arguments.putSerializable(EXTRA_HORROR, film) // кладём игру в коробочку
+            if (genres != null){
+            arguments.putInt(EXTRA_HORROR, genres)
+            }
             fragment.arguments = arguments // присоединяем аргументы к фрагменту
             return fragment // возвращаем фрагмент
-        }
+
+       }
     }
 
 
@@ -51,24 +56,25 @@ class DrammaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
+        updateMovies()
     }
 
     override fun onResume() {
         super.onResume()
-        updateMovies()
     }
 
     fun updateMovies(){
         for (i in 1..5) {
-        Database.service.requestmovies(i).enqueue(object : Callback<MovieResults> {
+        Database.service.requestmovies(i, getArguments()!!.getInt(EXTRA_HORROR)).enqueue(object : Callback<MovieResults> {
             override fun onFailure(call: Call<MovieResults>, t: Throwable) {
                 Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
-                Log.e("MoviesFragment", "onFailure", t)
+                Log.e("MoviesFragment_er", "onFailure", t)
             }
 
             override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
                 val newMovies: List<Film> = response.body()?.results?: return
                 adapter.movies.addAll(newMovies)
+                adapter.notifyDataSetChanged()
             }
         })
     }}

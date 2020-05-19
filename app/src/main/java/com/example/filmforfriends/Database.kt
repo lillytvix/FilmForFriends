@@ -18,5 +18,5 @@ object Database{
 
 interface MoviesService{
     @GET("discover/movie?sort_by=popularity.desc&api_key=795d87bfa31bd215fc78ae4423e39543")
-    fun requestmovies(@Query("page") page: Int): Call<MovieResults>
+    fun requestmovies(@Query("page") page: Int, @Query("with_genres") genres: Int?): Call<MovieResults>
 }
