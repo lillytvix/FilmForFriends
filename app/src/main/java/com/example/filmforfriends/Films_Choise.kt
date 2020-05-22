@@ -1,5 +1,7 @@
 package com.example.filmforfriends
 
+import kotlinx.android.synthetic.main.films_element.*
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,26 +21,21 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class DrammaFragment : Fragment() {
+class Films_Choice : Fragment() {
     val adapter = Adapter()
 
 
 
-
     companion object {
-        private const val EXTRA_HORROR = "HORROR"
 
-        fun newFragment(genres: Int?): DrammaFragment {
+        fun newFragment(): Films_Choice {
 
-            val fragment = DrammaFragment() // создаём фрагмент
+            val fragment = Films_Choice() // создаём фрагмент
             val arguments = Bundle() // создаём коробочку для аргументов
-            if (genres != null){
-            arguments.putInt(EXTRA_HORROR, genres)
-            }
             fragment.arguments = arguments // присоединяем аргументы к фрагменту
             return fragment // возвращаем фрагмент
 
-       }
+        }
     }
 
 
@@ -46,49 +43,25 @@ class DrammaFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.for_element, container, false)
+        return inflater.inflate(R.layout.films_element, container, false)
     }
 
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        updateMovies()
+        recyclerViewforFilms.adapter = adapter
+        recyclerViewforFilms.layoutManager = GridLayoutManager(context, 3)
     }
-
-
-    fun updateMovies(){
-        for (i in 1..5) {
-            val genres = if (arguments!!.containsKey(EXTRA_HORROR))
-                arguments!!.getInt(EXTRA_HORROR)else
-                null
-        Database.service.requestmovies(i, genres).enqueue(object : Callback<MovieResults> {
-            override fun onFailure(call: Call<MovieResults>, t: Throwable) {
-                Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
-                Log.e("MoviesFragment_er", "onFailure", t)
-            }
-
-            override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
-                val newMovies: List<Film> = response.body()?.results?: return
-                adapter.movies.addAll(newMovies)
-                adapter.notifyDataSetChanged()
-            }
-        })
-    }}
 
 
     inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        var movies: MutableList<Film> = mutableListOf()
-            set(value) {
-                field = value
-                notifyDataSetChanged()
-            }
+        var genres = listOf<Int>(R.drawable.comedy, R.drawable.drama, R.drawable.horrors)
+
 
         override fun getItemCount(): Int {
-            return movies?.size ?: 0
+            return genres?.size ?: 0
         }
 
 
@@ -100,8 +73,8 @@ class DrammaFragment : Fragment() {
 
         /* а этот метод заполняет вьюшки содержимым */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val film = movies!![position]
-            Picasso.get().load("https://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
+            val genre = genres!![position]
+            Picasso.get().load(genre).fit().centerInside().into(holder.imageView)
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
 
@@ -113,5 +86,4 @@ class DrammaFragment : Fragment() {
             val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
         }
     }
-
 }

@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.Main_Activiti, DrammaFragment.newFragment(18))
+            .replace(R.id.Main_Activiti, Films_Choice.newFragment())
             .commit()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         menu.setNavigationItemSelectedListener { item ->
             when (item.itemId) { // item - пункт меню, на который нажали
                 R.id.Main-> show(DrammaFragment.newFragment(null))
-                R.id.Films-> show(DrammaFragment.newFragment(18)) // если нажали на Игры, то показываем фрагмент с играми
+                R.id.Films-> show(Films_Choice()) // если нажали на Игры, то показываем фрагмент с играми
 
             }
             drawlerLayout.closeDrawer(GravityCompat.START) // закрываем меню
