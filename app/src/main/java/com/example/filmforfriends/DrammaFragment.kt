@@ -94,7 +94,7 @@ class DrammaFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflater = LayoutInflater.from(context) // получаем из контекста создаватель макетов inflater
-            val view = inflater.inflate(R.layout.image_item, parent, false) // читаем макет и на его основе создаём view
+            val view = inflater.inflate(R.layout.for_element, parent, false) // читаем макет и на его основе создаём view
             return ViewHolder(view)
         }
 
@@ -110,7 +110,7 @@ class DrammaFragment : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.imageView) // ImageView для постера
         }
     }
 
