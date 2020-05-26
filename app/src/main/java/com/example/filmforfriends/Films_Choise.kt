@@ -1,6 +1,6 @@
 package com.example.filmforfriends
 
-import kotlinx.android.synthetic.main.films_element.*
+import kotlinx.android.synthetic.main.for_element.*
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.recycler_view.*
 
 
 class Films_Choice : Fragment() {
@@ -36,15 +37,15 @@ class Films_Choice : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.films_element, container, false)
+        return inflater.inflate(R.layout.recycler_view, container, false)
     }
 
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerViewforFilms.adapter = adapter
-        recyclerViewforFilms.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(context, 3)
     }
 
 
@@ -71,7 +72,7 @@ class Films_Choice : Fragment() {
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
                 fragmentManager!!.beginTransaction()
-                    .replace(R.id.Main_Activiti, DrammaFragment.newFragment(null))
+                    .replace(R.id.Main_Activiti, DrammaFragment.newFragment(18))
                     .commit()
             }
 
