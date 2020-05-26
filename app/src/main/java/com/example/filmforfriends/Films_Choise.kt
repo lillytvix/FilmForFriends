@@ -3,22 +3,15 @@ package com.example.filmforfriends
 import kotlinx.android.synthetic.main.films_element.*
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowId
 import android.widget.ImageView
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.for_element.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class Films_Choice : Fragment() {
@@ -66,7 +59,7 @@ class Films_Choice : Fragment() {
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val inflater = LayoutInflater.from(context) // получаем из контекста создаватель макетов inflater
+            val inflater = LayoutInflater.from(context)
             val view = inflater.inflate(R.layout.image_item, parent, false) // читаем макет и на его основе создаём view
             return ViewHolder(view)
         }
@@ -77,8 +70,11 @@ class Films_Choice : Fragment() {
             Picasso.get().load(genre).fit().centerInside().into(holder.imageView)
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
-
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.Main_Activiti, DrammaFragment.newFragment(null))
+                    .commit()
             }
+
         }
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */

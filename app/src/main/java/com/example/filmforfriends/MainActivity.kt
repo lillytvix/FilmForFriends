@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
         menu.setNavigationItemSelectedListener { item ->
-            when (item.itemId) { // item - пункт меню, на который нажали
+            when (item.itemId) {
                 R.id.Main-> show(DrammaFragment.newFragment(null))
-                R.id.Films-> show(Films_Choice()) // если нажали на Игры, то показываем фрагмент с играми
+                R.id.Films-> show(Films_Choice())
 
             }
             drawlerLayout.closeDrawer(GravityCompat.START) // закрываем меню

@@ -19,26 +19,26 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class DrammaFragment : Fragment() {
+class HorrorFragment : Fragment() {
     val adapter = Adapter()
 
 
 
 
     companion object {
-        private const val EXTRA_DRAMA = "DRAMA"
+        private const val EXTRA_HORROR = "HORROR"
 
         fun newFragment(genres: Int?): DrammaFragment {
 
             val fragment = DrammaFragment() // создаём фрагмент
             val arguments = Bundle() // создаём коробочку для аргументов
             if (genres != null){
-            arguments.putInt(EXTRA_DRAMA, genres)
+                arguments.putInt(EXTRA_HORROR, genres)
             }
             fragment.arguments = arguments // присоединяем аргументы к фрагменту
             return fragment // возвращаем фрагмент
 
-       }
+        }
     }
 
 
@@ -59,22 +59,22 @@ class DrammaFragment : Fragment() {
 
     fun updateMovies(){
         for (i in 1..5) {
-            val genres = if (arguments!!.containsKey(EXTRA_DRAMA))
-                arguments!!.getInt(EXTRA_DRAMA)else
+            val genres = if (arguments!!.containsKey(EXTRA_HORROR))
+                arguments!!.getInt(EXTRA_HORROR)else
                 null
-        Database.service.requestmovies(i, genres).enqueue(object : Callback<MovieResults> {
-            override fun onFailure(call: Call<MovieResults>, t: Throwable) {
-                Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
-                Log.e("MoviesFragment_er", "onFailure", t)
-            }
+            Database.service.requestmovies(i, genres).enqueue(object : Callback<MovieResults> {
+                override fun onFailure(call: Call<MovieResults>, t: Throwable) {
+                    Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
+                    Log.e("MoviesFragment_er", "onFailure", t)
+                }
 
-            override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
-                val newMovies: List<Film> = response.body()?.results?: return
-                adapter.movies.addAll(newMovies)
-                adapter.notifyDataSetChanged()
-            }
-        })
-    }}
+                override fun onResponse(call: Call<MovieResults>, response: Response<MovieResults>) {
+                    val newMovies: List<Film> = response.body()?.results?: return
+                    adapter.movies.addAll(newMovies)
+                    adapter.notifyDataSetChanged()
+                }
+            })
+        }}
 
 
     inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
