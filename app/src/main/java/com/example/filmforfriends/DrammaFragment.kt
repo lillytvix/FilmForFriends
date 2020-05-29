@@ -13,6 +13,7 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.image_item_films_list_layout.*
 import kotlinx.android.synthetic.main.item_element.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import retrofit2.Call
@@ -56,6 +57,8 @@ class DrammaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
+        val game = arguments!!.getSerializable(EXTRA_DRAMA) as Film
+        name_movies.text = game.title // меняем название игры
         updateMovies()
     }
 
@@ -95,7 +98,7 @@ class DrammaFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflater = LayoutInflater.from(context) // получаем из контекста создаватель макетов inflater
-            val view = inflater.inflate(R.layout.image_item, parent, false) // читаем макет и на его основе создаём view
+            val view = inflater.inflate(R.layout.image_item_films_list_layout, parent, false) // читаем макет и на его основе создаём view
             return ViewHolder(view)
         }
 
@@ -111,7 +114,7 @@ class DrammaFragment : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.Image_item_for_list) // ImageView для постера
         }
     }
 

@@ -5,12 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <com.makeramen.roundedimageview.RoundedImageView
-        android:paddingLeft="20dp"
+        android:paddingLeft="15dp"
         android:id="@+id/Image_item_for_list"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="190dp"
+        android:layout_height="300dp"
         app:riv_corner_radius="20dp" />
+
+    <TextView
+        android:id="@+id/name_movies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Image_item_for_list"
+        android:padding="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</RelativeLayout>
 
 </LinearLayout>
 

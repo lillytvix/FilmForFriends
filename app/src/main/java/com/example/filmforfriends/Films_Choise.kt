@@ -1,5 +1,6 @@
 package com.example.filmforfriends
 
+import android.graphics.Movie
 import kotlinx.android.synthetic.main.item_element.*
 
 import android.os.Bundle
@@ -12,10 +13,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.image_item_films_list_layout.*
 import kotlinx.android.synthetic.main.recycler_view.*
 
 
 class Films_Choice : Fragment() {
+
     val adapter = Adapter()
 
 
@@ -92,7 +95,7 @@ class Films_Choice : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.Image_item_for_list) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
         }
     }
 }
