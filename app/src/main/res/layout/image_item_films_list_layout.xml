@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/NoRmal">
+    android:layout_height="wrap_content">
 
     <com.makeramen.roundedimageview.RoundedImageView
-     android:id="@+id/Image_item"
-    android:layout_width="200dp"
-    android:layout_height="100dp"
-     app:riv_corner_radius="20dp" />
+        android:paddingLeft="20dp"
+        android:id="@+id/Image_item_for_list"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:riv_corner_radius="20dp" />
 
 </LinearLayout>
 

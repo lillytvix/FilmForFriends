@@ -1,6 +1,6 @@
 package com.example.filmforfriends
 
-import kotlinx.android.synthetic.main.for_element.*
+import kotlinx.android.synthetic.main.item_element.*
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -51,7 +51,7 @@ class Films_Choice : Fragment() {
 
     inner class Adapter : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        var genres = listOf<Int>(R.drawable.comedy, R.drawable.drama, R.drawable.horrors)
+        var genres = listOf<Int>(R.drawable.comedy, R.drawable.drama, R.drawable.horrors, R.drawable.melodramma)
 
 
         override fun getItemCount(): Int {
@@ -71,16 +71,28 @@ class Films_Choice : Fragment() {
             Picasso.get().load(genre).fit().centerInside().into(holder.imageView)
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
-                fragmentManager!!.beginTransaction()
-                    .replace(R.id.Main_Activiti, DrammaFragment.newFragment(18))
-                    .commit()
+                if(position == 0){
+                   fragmentManager!!.beginTransaction()
+                       .replace(R.id.Main_Activiti, DrammaFragment.newFragment(35))
+                       .commit()
+                }else if(position == 1) {
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.Main_Activiti, DrammaFragment.newFragment(18))
+                        .commit()
+                } else{
+                    fragmentManager!!.beginTransaction()
+                        .replace(R.id.Main_Activiti, DrammaFragment.newFragment(27))
+                        .commit()
+                }
+
+
             }
 
         }
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.Image_item_for_list) // ImageView для постера
         }
     }
 }

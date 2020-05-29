@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowId
 import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.for_element.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,7 +43,7 @@ class HorrorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.for_element, container, false)
+        return inflater.inflate(R.layout.item_element, container, false)
     }
 
 
@@ -92,7 +89,7 @@ class HorrorFragment : Fragment() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val inflater = LayoutInflater.from(context) // получаем из контекста создаватель макетов inflater
-            val view = inflater.inflate(R.layout.for_element, parent, false) // читаем макет и на его основе создаём view
+            val view = inflater.inflate(R.layout.item_element, parent, false) // читаем макет и на его основе создаём view
             return ViewHolder(view)
         }
 

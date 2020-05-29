@@ -4,6 +4,7 @@
 
 package com.example.filmforfriends
 
+import android.app.AlertDialog
 import android.app.ProgressDialog.show
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -12,8 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.image_item.*
+import android.content.DialogInterface
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.View
+import android.widget.Toast
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +47,20 @@ class MainActivity : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }}
 
+     var backpressedTime: Long = 0
+     var backToast: Toast? = null
 
+    override fun onBackPressed() {
+        if (backpressedTime + 2000 > System.currentTimeMillis()) {
+            backToast?.cancel()
+            super.onBackPressed()
+            return
+        }else{
+            backToast = Toast.makeText(baseContext,"Нажми ещё раз чтобы выйти из приложения", Toast.LENGTH_LONG)
+            backToast?.show()
+        }
+       backpressedTime = System.currentTimeMillis()
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home){
@@ -54,6 +76,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun show(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .addToBackStack("History")
             .replace(R.id.Main_Activiti, fragment)
             .commit()
 

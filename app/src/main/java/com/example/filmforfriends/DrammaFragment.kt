@@ -13,7 +13,8 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.for_element.*
+import kotlinx.android.synthetic.main.item_element.*
+import kotlinx.android.synthetic.main.recycler_view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,6 +54,8 @@ class DrammaFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         updateMovies()
     }
 
@@ -108,7 +111,7 @@ class DrammaFragment : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val imageView = itemView.findViewById<ImageView>(R.id.imageView) // ImageView для постера
+            val imageView = itemView.findViewById<ImageView>(R.id.Image_item) // ImageView для постера
         }
     }
 
