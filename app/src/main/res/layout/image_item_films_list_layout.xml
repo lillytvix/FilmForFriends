@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
 <RelativeLayout
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/Image_item_for_list"
-        android:padding="8dp"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:paddingLeft="30dp"
+        android:textColor="@android:color/black"
+        android:textSize="25dp" />
 
 </RelativeLayout>
 

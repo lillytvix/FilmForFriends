@@ -1,4 +1,4 @@
-package com.example.filmforfriends
+package com.film.filmforfriends
 
 import retrofit2.Call
 import retrofit2.Retrofit

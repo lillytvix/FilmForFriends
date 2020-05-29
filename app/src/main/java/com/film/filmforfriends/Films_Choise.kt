@@ -1,7 +1,4 @@
-package com.example.filmforfriends
-
-import android.graphics.Movie
-import kotlinx.android.synthetic.main.item_element.*
+package com.film.filmforfriends
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.image_item_films_list_layout.*
 import kotlinx.android.synthetic.main.recycler_view.*
 
 

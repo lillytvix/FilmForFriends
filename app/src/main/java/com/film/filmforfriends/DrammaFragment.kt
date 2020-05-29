@@ -1,4 +1,4 @@
-package com.example.filmforfriends
+package com.film.filmforfriends
 
 import android.os.Bundle
 import android.util.Log
@@ -6,15 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowId
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.image_item_films_list_layout.*
-import kotlinx.android.synthetic.main.item_element.*
 import kotlinx.android.synthetic.main.recycler_view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,8 +55,6 @@ class DrammaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-        val game = arguments!!.getSerializable(EXTRA_DRAMA) as Film
-        name_movies.text = game.title // меняем название игры
         updateMovies()
     }
 
@@ -105,6 +101,7 @@ class DrammaFragment : Fragment() {
         /* а этот метод заполняет вьюшки содержимым */
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val film = movies!![position]
+            holder.textView.text = film.title
             Picasso.get().load("https://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
@@ -115,6 +112,7 @@ class DrammaFragment : Fragment() {
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             val imageView = itemView.findViewById<ImageView>(R.id.Image_item_for_list) // ImageView для постера
+            val textView = itemView.findViewById<TextView>(R.id.name_movies)
         }
     }
 

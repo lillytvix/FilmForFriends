@@ -2,25 +2,14 @@
 /*https://www.themoviedb.org/settings/api Api фильмов*/
 /*https://jsoneditoronline.org/#left=local.giquje json*/
 
-package com.example.filmforfriends
+package com.film.filmforfriends
 
-import android.app.AlertDialog
-import android.app.ProgressDialog.show
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.image_item.*
-import android.content.DialogInterface
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.View
 import android.widget.Toast
 
 
