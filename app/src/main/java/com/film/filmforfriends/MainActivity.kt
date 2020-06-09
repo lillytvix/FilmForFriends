@@ -6,11 +6,13 @@ package com.film.filmforfriends
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 
 
 class MainActivity : AppCompatActivity() {
@@ -19,9 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Тул бар
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.Main_Activiti, Films_Choice.newFragment())
+            .replace(R.id.Main_Activiti, DrammaFragment.newFragment(null))
             .commit()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -40,7 +45,7 @@ class MainActivity : AppCompatActivity() {
      var backToast: Toast? = null
 
     override fun onBackPressed() {
-        if (backpressedTime + 2000 > System.currentTimeMillis()) {
+        if (backpressedTime + 3000 > System.currentTimeMillis()) {
             backToast?.cancel()
             super.onBackPressed()
             return

@@ -111,6 +111,7 @@ class DrammaFragment : Fragment() {
 
         /* класс вью холдера - он содержит ссылки на нужные нам вьюшки */
         inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    
             val imageView = itemView.findViewById<ImageView>(R.id.Image_item_for_list) // ImageView для постера
             val textView = itemView.findViewById<TextView>(R.id.name_movies)
         }
