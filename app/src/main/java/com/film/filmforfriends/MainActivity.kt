@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
+
         menu.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.Main-> show(DrammaFragment.newFragment(null))
