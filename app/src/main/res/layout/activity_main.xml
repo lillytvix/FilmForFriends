@@ -7,35 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include
-        layout="@layout/toolbar"
-        />
-
     <FrameLayout
         android:id="@+id/Main_Activiti"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
 
+        <include layout="@layout/toolbar" />
 
-
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/framelayout"
-        android:background="?android:colorBackground"
-        android:layout_gravity = "start"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="?android:colorBackground">
 
         <com.google.android.material.navigation.NavigationView
-            app:menu="@menu/menu"
             android:id="@+id/menu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            app:menu="@menu/menu">
+
+        </com.google.android.material.navigation.NavigationView>
+
     </FrameLayout>
-
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
