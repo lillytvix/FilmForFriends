@@ -5,7 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#FFFFFF">
+
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarFadeDuration="5"
+        android:src="@drawable/welcome">
+
+    </pl.droidsonroids.gif.GifImageView>
+
 
     <LinearLayout
         android:id="@+id/Main_Activiti"
@@ -16,6 +27,7 @@
         <include layout="@layout/toolbar" />
 
     </LinearLayout>
+
 
     <FrameLayout
         android:id="@+id/framelayout"

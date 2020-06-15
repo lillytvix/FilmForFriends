@@ -19,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class DrammaFragment : Fragment() {
+class FilmsGeneres : Fragment() {
     val adapter = Adapter()
 
 
@@ -28,11 +28,12 @@ class DrammaFragment : Fragment() {
     companion object {
         private const val EXTRA_DRAMA = "DRAMA"
 
-        fun newFragment(genres: Int?): DrammaFragment {
+        fun newFragment(genres: Int?): FilmsGeneres {
 
-            val fragment = DrammaFragment() // создаём фрагмент
+            val fragment = FilmsGeneres() // создаём фрагмент
             val arguments = Bundle() // создаём коробочку для аргументов
             if (genres != null){
+
             arguments.putInt(EXTRA_DRAMA, genres)
             }
             fragment.arguments = arguments // присоединяем аргументы к фрагменту
@@ -66,7 +67,7 @@ class DrammaFragment : Fragment() {
                 null
         Database.service.requestmovies(i, genres).enqueue(object : Callback<MovieResults> {
             override fun onFailure(call: Call<MovieResults>, t: Throwable) {
-                Toast.makeText(context, "Ошибка(((", LENGTH_LONG).show()
+                Toast.makeText(context, "Проблема с доступом в интернет((", LENGTH_LONG).show()
                 Log.e("MoviesFragment_er", "onFailure", t)
             }
 
@@ -102,7 +103,7 @@ class DrammaFragment : Fragment() {
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val film = movies!![position]
             holder.textView.text = film.title
-            Picasso.get().load("https://image.tmdb.org/t/p/w185" + film.poster_path ).fit().centerCrop().into(holder.imageView) // загружаем картинку
+            Picasso.get().load("https://image.tmdb.org/t/p/w185" + film.poster_path ).placeholder(R.drawable.wait).fit().centerCrop().into(holder.imageView) // загружаем картинку
 
             holder.itemView.setOnClickListener { // подписываемся на нажатие
 

@@ -71,15 +71,15 @@ class Films_Choice : Fragment() {
             holder.itemView.setOnClickListener { // подписываемся на нажатие
                 if(position == 0){
                    fragmentManager!!.beginTransaction()
-                       .replace(R.id.Main_Activiti, DrammaFragment.newFragment(35))
+                       .replace(R.id.Main_Activiti, FilmsGeneres.newFragment(35))
                        .commit()
                 }else if(position == 1) {
                     fragmentManager!!.beginTransaction()
-                        .replace(R.id.Main_Activiti, DrammaFragment.newFragment(18))
+                        .replace(R.id.Main_Activiti, FilmsGeneres.newFragment(18))
                         .commit()
                 } else{
                     fragmentManager!!.beginTransaction()
-                        .replace(R.id.Main_Activiti, DrammaFragment.newFragment(27))
+                        .replace(R.id.Main_Activiti, FilmsGeneres.newFragment(27))
                         .commit()
                 }
 
